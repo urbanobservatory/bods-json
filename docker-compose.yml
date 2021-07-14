@@ -1,0 +1,28 @@
+version: "3.5"
+
+# https://docs.docker.com/compose/compose-file/
+
+networks:
+  web: # Traefik
+    external: true
+
+services:
+  bods-json:
+    container_name: bods-json
+    restart: unless-stopped
+    build: .
+    image: bods-json
+    logging:
+      driver: json-file
+      options:
+        max-size: "1024k"
+        max-file: "10"
+    networks:
+      - web
+    expose:
+      - 5000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.port=5000" # service port inside container
+      - "traefik.frontend.rule=Host:buses.dev.urbanobservatory.ac.uk"
+

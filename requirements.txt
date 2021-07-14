@@ -1,0 +1,6 @@
+xmltodict
+schedule
+flask
+requests
+waitress
+
