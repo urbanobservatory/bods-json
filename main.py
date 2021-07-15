@@ -8,11 +8,13 @@ import json
 import time
 import xml.etree.ElementTree as ET
 from flask import Flask, jsonify
+from flask_compress import Compress
 from multiprocessing import Process, Manager
 from io import BytesIO
 
 print('Starting puller for DfT BODS...')
 app = Flask(__name__)
+Compress(app)
 
 def fetchUpdate(operatorList=['GNEL']):
     print('Fetching update from DfT BODS...')
