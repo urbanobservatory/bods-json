@@ -1,6 +1,7 @@
 xmltodict
 schedule
 flask
+flask-compress
 requests
 waitress
 
