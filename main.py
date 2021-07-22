@@ -76,10 +76,13 @@ def startUpdate(operatorList, returns):
 @app.route('/vm', methods=['GET'])
 def serveBuses():
     global returns
-    return jsonify(returns['localBuses'])
+    response = jsonify(returns['localBuses'])
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    
+    return response
 
 def scheduler(nocTable, returns):
-    schedule.every(15).seconds.do(startUpdate, nocTable, returns)
+    schedule.every(10).seconds.do(startUpdate, nocTable, returns)
 
     while True:
         schedule.run_pending()
